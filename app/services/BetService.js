@@ -1,0 +1,1 @@
+const BetService = module.exports;

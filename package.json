@@ -1,0 +1,35 @@
+{
+  "name": "pruebamasivian",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node_modules/.bin/mocha tests/**/**/**/*Test.js --timeout=3300"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wartski1/PruebaMasivian.git"
+  },
+  "author": "Pedro Andres Ruiz Wartski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wartski1/PruebaMasivian/issues"
+  },
+  "dependencies": {
+    "ajv": "^6.1.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "async": "^2.6.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "run": "^1.4.0",
+    "test": "^0.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.5.3"
+  },
+  "homepage": "https://github.com/wartski1/PruebaMasivian#readme"
+}

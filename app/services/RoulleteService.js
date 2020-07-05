@@ -1,0 +1,1 @@
+const RoulleteService = module.exports;

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.idea/
+.idea/vcs.xml
+npm-debug.log
+env-local.yml
+.DS_Store
+test/.DS_Store
+.vscode
+*.log
+.nyc_output

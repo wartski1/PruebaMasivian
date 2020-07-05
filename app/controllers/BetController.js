@@ -1,0 +1,1 @@
+const BetController = module.exports;

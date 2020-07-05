@@ -1,0 +1,1 @@
+const RoulleteRepository = module.exports;
