@@ -6,9 +6,9 @@ RoulleteController.insertRoullete = (req, res, next) => RoulleteService.insertRo
   .catch(error => next(error));
 
 RoulleteController.roulleteOpening = (req, res, next) => {
-  const { params: { id } } = req;
+  const { params: { idRoullete } } = req;
 
-  return RoulleteService.roulleteOpening(id)
+  return RoulleteService.roulleteOpening(idRoullete)
     .then(response => res.send(response))
     .catch(error => next(error));
 };
