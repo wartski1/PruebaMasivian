@@ -7,5 +7,6 @@ const router = express.Router();
 router.post('/roullete/', RoulleteController.insertRoullete);
 router.post('/roullete/open/:idRoullete(\\d+)', RoulleteController.roulleteOpening);
 router.post('/bet/:idRoullete(\\d+)', BetController.insertBet);
+router.post('/bet/close/:idRoullete(\\d+)', RoulleteController.roulleteClosure);
 
 module.exports = router;

@@ -11,3 +11,9 @@ function getKey(key) {
 
 BetRepostory.insertBet = (key, data) =>
   Redis.rpush(getKey(key), JSON.stringify(data));
+
+BetRepostory.getBets = (key) =>
+  Redis.lrange(getKey(key), 0, -1);
+
+BetRepostory.deleteBetList = (key) =>
+  Redis.del(getKey(key));
