@@ -13,3 +13,6 @@ RoulleteRepository.getRoullete = (index) =>
 
 RoulleteRepository.updateRoullete = (index, data) =>
   Redis.lset(KEY_ROULLETE, index, JSON.stringify(data));
+
+RoulleteRepository.getRoullets = () =>
+  Redis.lrange(KEY_ROULLETE, 0, -1);

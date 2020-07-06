@@ -20,3 +20,7 @@ RoulleteController.roulleteClosure = (req, res, next) => {
     .then(response => res.send(response))
     .catch(error => next(error));
 };
+
+RoulleteController.getRoullets = (req, res, next) => RoulleteService.getRoullets()
+  .then(response => res.send(response))
+  .catch(error => next(error));
