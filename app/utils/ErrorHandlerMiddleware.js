@@ -1,18 +1,34 @@
-const ErrorHandlerMiddleware = module.exports;
-
-ErrorHandlerMiddleware.MainHandler = (err, req, res) => {
+function ErrorHandler(err, req, res, next) {
   const { status = 500, message = 'Error', code = 500 } = err;
+  res.status(status).send({ error: { message, code } });
 
-  return res.status(status).send({ error: { message, code } });
-};
+  return next();
+}
 
-ErrorHandlerMiddleware.BaseError = function BaseError(message, code, status, stack) {
-  this.message = message;
-  this.status = status || code;
-  this.code = code;
-  this.stack = stack || new Error().stack;
-};
+class CustomError extends Error {
+  constructor(status = 500, message, code = 500) {
+    super();
+    this.status = status;
+    this.message = message;
+    this.code = code;
+  }
+}
 
-ErrorHandlerMiddleware.BadRequestError = function BadRequestError(message) {
-  return new ErrorHandlerMiddleware.BaseError(message, 400, 400);
+class NotFoundError extends CustomError {
+  constructor(message = 'Not found', code = 404) {
+    super(404, message, code);
+  }
+}
+
+class BadRequestError extends CustomError {
+  constructor(message = 'Bad request', code = 400) {
+    super(400, message, code);
+  }
+}
+
+module.exports = {
+  ErrorHandler,
+  CustomError,
+  NotFoundError,
+  BadRequestError,
 };

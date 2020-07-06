@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const routes = require('./app/routes');
-const ErrorHandlerMiddleware = require('./app/utils/ErrorHandlerMiddleware');
+const { ErrorHandler } = require('./app/utils/ErrorHandlerMiddleware');
 const { PREFIX } = require('./app/config/AppConfig');
 
 const app = express();
@@ -9,7 +9,7 @@ const { PORT = 3000 } = process.env;
 
 app.use(bodyParser.json());
 app.use(PREFIX, routes);
-app.use(ErrorHandlerMiddleware.MainHandler);
+app.use(ErrorHandler);
 
 process.on('unhandledRejection', (reason, p) => {
   console.error('Unhandled Rejection at: Promise', p, 'reason:', reason);
