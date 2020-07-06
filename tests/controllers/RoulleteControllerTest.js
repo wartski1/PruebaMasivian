@@ -7,7 +7,7 @@ const Ioredis = require('ioredis');
 const redisConfig = require('../../app/config/RedisConfig');
 
 const Redis = new Ioredis(redisConfig);
-const { KEY_ROULLETE } = process.env;
+const { KEY_ROULLETE, KEY_BET } = process.env;
 const API = '/api/roulette-game';
 chai.use(chaiHttp);
 
@@ -67,5 +67,51 @@ describe('Roullete CRUD flows', () => {
         const { status } = err;
         assert.equal(400, status);
       });
-  });  
+  });
+
+  it('Test to close bets correctly.', async () => {
+    const data = { state: 'active' };
+    await Redis.rpush(KEY_ROULLETE, JSON.stringify(data));
+    await Redis.rpush(`${KEY_BET}:0`, JSON.stringify(
+    {
+      idClient: 'Basic MTE6MQ==',
+      idRoullete: '0',
+      betValue: '2',
+      betAmount: 222
+    }));
+
+    return chai
+      .request(app)
+      .post(`${API}/bet/close/0`)
+      .send({})
+      .then((res) => {
+        const { status } = res;
+        assert.equal(status, 200);
+      });
+  });
+
+  it('Test to close bets when roulette does not exist.', () => chai
+    .request(app)
+    .post(`${API}/bet/close/0`)
+    .send({})
+    .then(assert.fail)
+    .catch((err) => {
+      const { status } = err;
+      assert.equal(404, status);
+    }));
+
+  it('test to close bets when roulette is closed', async () => {
+    const data = { state: 'closed' };
+    await Redis.rpush(KEY_ROULLETE, JSON.stringify(data));
+
+    return chai
+      .request(app)
+      .post(`${API}/bet/close/0`)
+      .send({})
+      .then(assert.fail)
+      .catch((err) => {
+        const { status } = err;
+        assert.equal(400, status);
+      });
+  });
 });

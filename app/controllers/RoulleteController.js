@@ -12,3 +12,11 @@ RoulleteController.roulleteOpening = (req, res, next) => {
     .then(response => res.send(response))
     .catch(error => next(error));
 };
+
+RoulleteController.roulleteClosure = (req, res, next) => {
+  const { params: { idRoullete } } = req;
+
+  return RoulleteService.roulleteClosure(idRoullete)
+    .then(response => res.send(response))
+    .catch(error => next(error));
+};
