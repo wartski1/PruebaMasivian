@@ -1,3 +1,3 @@
 module.exports = {
-  PREFIX: '/api/roulette',
+  PREFIX: '/api/roulette-game',
 };
