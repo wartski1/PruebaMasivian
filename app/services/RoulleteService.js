@@ -39,3 +39,15 @@ RoulleteService.roulleteClosure = async (id) => {
 
   return betList;
 };
+
+RoulleteService.getRoullets = async () => {
+  const roullets = await RoulleteRepository.getRoullets();
+  let index = 0;
+  const roulleteList = await Promise.mapSeries(roullets, (roullete) => {
+    const roulleteJson = JSON.parse(roullete);
+
+    return { id: index++, ...roulleteJson };
+  });
+
+  return roulleteList;
+}

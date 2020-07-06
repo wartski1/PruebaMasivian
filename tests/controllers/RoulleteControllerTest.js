@@ -114,4 +114,20 @@ describe('Roullete CRUD flows', () => {
         assert.equal(400, status);
       });
   });
+
+  it('Test that lists the roulettes that have been created.', async () => {
+    const data = { state: 'closed' };
+    await Redis.rpush(KEY_ROULLETE, JSON.stringify(data));
+    await Redis.rpush(KEY_ROULLETE, JSON.stringify(data));
+    await Redis.rpush(KEY_ROULLETE, JSON.stringify(data));
+
+    return chai
+      .request(app)
+      .get(`${API}/roullete/`)
+      .then((res) => {
+        const { status, body } = res;
+        assert.equal(status, 200);
+        assert.equal(body.length, 3);
+      });
+  });
 });
